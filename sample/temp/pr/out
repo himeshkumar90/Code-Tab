@@ -1,0 +1,31 @@
+	Clauses of depth/7 are not together in the source-file
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:103:
+	Singleton variables: [Move0]
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:103:
+	Clauses of same_lavel/8 are not together in the source-file
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:112:
+	Singleton variables: [Record1]
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:116:
+	Singleton variables: [Move]
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:124:
+	Singleton variables: [Player,Alpha,Bita,Move]
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:124:
+	Clauses of depth/7 are not together in the source-file
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:129:
+	Singleton variables: [Player,Position,Bita]
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:129:
+	Clauses of same_lavel/8 are not together in the source-file
+Warning: c:/xampp/htdocs/compiler/temp/pr/code.pr:132:
+	Singleton variables: [Player,Position,Alpha]
+% c:/xampp/htdocs/compiler/temp/pr/code.pr compiled 0.02 sec, 58 clauses
+Welcome to SWI-Prolog (Multi-threaded, 64 bits, Version 6.2.6)
+Copyright (c) 1990-2012 University of Amsterdam, VU Amsterdam
+SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software,
+and you are welcome to redistribute it under certain conditions.
+Please visit http://www.swi-prolog.org for details.
+
+For help, use ?- help(Topic). or ?- apropos(Word).
+
+#
+true 
+EOF: halt

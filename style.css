@@ -1,0 +1,196 @@
+    #editor { 
+        position: absolute;
+        top: 153;
+        /*right: 700;
+        bottom: 350;*/
+        left: 50;
+        height:450px;
+	width:550px;
+	 border:3px solid #aaa;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;    
+	}
+    #codeTextarea{
+             position: absolute;
+	     left:750px;
+             top: 153;
+	     /*margin-right:120px;*/
+             width:550px;
+               height:455px;
+	     color:#FFFFFF;
+	     background-color:#272822;
+	      border:3px solid #aaa;
+          -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;    
+		  }
+    #sample
+    {
+    position:absolute;
+    border:5px solid #aaa; 
+    top:150px;
+	width:300px;
+	height:450px;
+    left:530px;
+    overflow-y: scroll;
+    resize:none;
+    background-color:#FDF6E3;
+    display:none;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;    
+    z-index:2;
+	}
+	#input
+    {
+    position:absolute;
+    border:5px solid #aaa; 
+    top:680px;
+	width:1250px;
+	height:150px;
+    left:50px;
+    overflow-y: scroll;
+    resize:none;
+    background-color:#FDF6E3;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;    
+    z-index:2;
+	}
+	#inputheading
+	{ position:absolute;
+    top:630px;
+	left:50px;
+    
+	}
+   	#flip1
+    {
+            position:absolute;
+	    top:624px;
+            left:520px;
+           font:19px arial,sans-serif;
+	    
+            
+    }
+    h4.source
+	{position: absolute;
+	    left:60px;
+	    top:111px;
+	  color:#ffffff;
+	  }
+	  h4.output
+	    	{position: absolute;
+	    	    left:760px;
+	    	    top:111px;
+			color:#ffffff;
+	    	  }  
+    button.but1
+    {
+    
+    position: absolute;
+    	     left: 629px;
+             top: 300;
+    	     width:100px;
+             height:40px;
+    } 	  
+   
+   button.but2
+   	  {	     
+   position: absolute;
+   	  left: 629px;
+   	  top: 390;
+   	  height:40px;             	           
+   	  width:100px;        
+   	       } 	  
+   	     body, html{
+   	         padding:0!important; 
+   	         margin:0 !important;
+   	     
+   	         
+   	     }
+    #logo
+   { 
+         position:absolute;
+         margin-top:0px;
+		 margin-left:60px;
+  }	
+	#heading1
+        {
+		position:absolute;
+         margin-top:0px;
+		 margin-left:530px;
+         font:Comic Sans MS;        
+		}
+		#heading2
+        {
+		position:absolute;
+         margin-top:64px;
+		 margin-left:500px;
+         }
+		
+		/*#warning
+		{
+		position:absolute;
+		top:650px;
+        left:50px;		
+		
+		}*/
+		#topmenu
+			         {
+			            margin-top:100px;
+			            padding:0;
+			            background-color:#272822 !important;
+			            clear:both;
+			            height:25px;
+			            position:absolute;
+			            top:-10px;
+			            width:1275px;
+				    left:40px;
+				    right:50px;
+			             border:2px solid #aaa;
+				 -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;    
+				 }
+			         
+				 #topmenu #right
+			         {
+			            position:float;
+						float:right;
+			            word-spacing:6px;
+			            font-size:90%;
+			            padding-right:15px;
+			            margin-top:-20px;
+						padding-top:-10px;
+			            color:white;
+			            white-space:nowrap;
+			            text-align:right;
+			         }
+			         #topmenu #left
+			         {
+			            position:absolute
+						float:left;
+			            word-spacing:80px;
+			            font-size:90%;
+			            padding-left:10px;
+			            padding-top:6px;
+			            white-space:nowrap;
+			            text-align:left;
+			         }
+			         .wrapper{
+			         			            width:1270px;
+			         			            padding:0px;
+			         			            margin:0 auto;
+			         			            overflow:hidden;
+			         			         }
+			         #topmenu a:link    {text-decoration:none;color:white;background-color:transparent;font-weight:bold; }
+			         #topmenu a:visited {text-decoration:none;color:white;background-color:transparent;}
+			         #topmenu a:hover   {text-decoration:none;color:blue; font-weight:bold; background-color:transparent;}
+			         #topmenu a:active  {text-decoration:none;color:#00FF66; background-color:transparent;}
+			         
+			         			        
+	     
+
+
+

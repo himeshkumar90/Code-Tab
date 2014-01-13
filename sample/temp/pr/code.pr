@@ -1,0 +1,167 @@
+:- dynamic board/1.
+
+init:- 
+   retractall(board(_)),
+   assert(board([_Z1,_Z2,_Z3,_Z4,_Z5,_Z6,_Z7,_Z8,_Z9])).
+:- init.
+
+
+mark(Player, [X|_],1,1) :- var(X), X=Player.
+mark(Player, [_,X|_],1,2) :- var(X), X=Player.
+mark(Player, [_,_,X|_],1,3) :- var(X), X=Player.
+mark(Player, [_,_,_,X|_],2,1) :- var(X), X=Player.
+mark(Player, [_,_,_,_,X|_],2,2) :- var(X), X=Player.
+mark(Player, [_,_,_,_,_,X|_],2,3) :- var(X), X=Player.
+mark(Player, [_,_,_,_,_,_,X|_],3,1) :- var(X), X=Player.
+mark(Player, [_,_,_,_,_,_,_,X|_],3,2) :- var(X), X=Player.
+mark(Player, [_,_,_,_,_,_,_,_,X|_],3,3) :- var(X), X=Player.
+
+
+move(P,(1,1),[X1|R],[P|R]) :- var(X1).
+move(P,(1,2),[X1,X2|R],[X1,P|R]) :- var(X2).
+move(P,(1,3),[X1,X2,X3|R],[X1,X2,P|R]) :- var(X3).
+move(P,(2,1),[X1,X2,X3,X4|R],[X1,X2,X3,P|R]) :- var(X4).
+move(P,(2,2),[X1,X2,X3,X4,X5|R],[X1,X2,X3,X4,P|R]) :- var(X5).
+move(P,(2,3),[X1,X2,X3,X4,X5,X6|R],[X1,X2,X3,X4,X5,P|R]) :- var(X6).
+move(P,(3,1),[X1,X2,X3,X4,X5,X6,X7|R],[X1,X2,X3,X4,X5,X6,P|R]) :- var(X7).
+move(P,(3,2),[X1,X2,X3,X4,X5,X6,X7,X8|R],[X1,X2,X3,X4,X5,X6,X7,P|R]) :- var(X8).
+move(P,(3,3),[X1,X2,X3,X4,X5,X6,X7,X8,X9|R],[X1,X2,X3,X4,X5,X6,X7,X8,P|R]) :- var(X9).
+
+
+record(Player,X,Y) :- 
+   retract(board(B)), 
+   mark(Player,B,X,Y),
+   assert(board(B)).
+
+
+win([Z1,Z2,Z3|_],P) :- Z1==P, Z2==P, Z3==P.
+win([_,_,_,Z1,Z2,Z3|_],P) :-  Z1==P, Z2==P, Z3==P.
+win([_,_,_,_,_,_,Z1,Z2,Z3],P) :-  Z1==P, Z2==P, Z3==P.
+win([Z1,_,_,Z2,_,_,Z3,_,_],P) :-  Z1==P, Z2==P, Z3==P.
+win([_,Z1,_,_,Z2,_,_,Z3,_],P) :-  Z1==P, Z2==P, Z3==P.
+win([_,_,Z1,_,_,Z2,_,_,Z3],P) :-  Z1==P, Z2==P, Z3==P.
+win([Z1,_,_,_,Z2,_,_,_,Z3],P) :-  Z1==P, Z2==P, Z3==P.
+win([_,_,Z1,_,Z2,_,Z3,_,_],P) :-  Z1==P, Z2==P, Z3==P.
+
+
+open([Z1,Z2,Z3|_],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+open([_,_,_,Z1,Z2,Z3|_],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+open([_,_,_,_,_,_,Z1,Z2,Z3],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+open([Z1,_,_,Z2,_,_,Z3,_,_],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+open([_,Z1,_,_,Z2,_,_,Z3,_],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+open([_,_,Z1,_,_,Z2,_,_,Z3],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+open([Z1,_,_,_,Z2,_,_,_,Z3],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+open([_,_,Z1,_,Z2,_,Z3,_,_],Player) :- (var(Z1) | Z1 == Player),(var(Z2) | Z2 == Player), (var(Z3) | Z3 == Player).
+
+
+/* value(Board,100) :- win(Board,o), !.
+ value(Board,-100) :- win(Board,x), !.
+*/
+
+
+value(Board,E) :- 
+   findall(o,open(Board,o),MAX),
+   length(MAX,Emax),      % # lines open to o
+   findall(x,open(Board,x),MIN), 
+   length(MIN,Emin),      % # lines open to x
+   E is Emax - Emin.
+
+
+c :- write('computer turn'),write('\n'),
+   board(B), 
+   depth(o,B,2,-200,200,(X,Y),_Value), 
+   record(o,X,Y),
+   showBoard.
+
+
+
+depth(Player,Position,2,Alpha2,Bita2,Move2,value2):-
+    					   findall((X,Y),mark(Player,Position,X,Y),Moves),
+						   same_lavel(Player,Position,2,Alpha2,Bita2,Moves,nil,[Move2,Value2]). %% not reaching upto here
+
+same_lavel(Player,Position,2,Alpha2,Bita2,[Move|Moves],Record2,Bestmove2):-
+									move(Player,Move,Position,New_position),other_player(Player,Other_player),
+							    	depth(Other_player,New_position,1,Alpha2,Bita2,Move1,Value1),             
+									cut_off2(Player,Position,2,Alpha2,Bita2,Moves,Move,Value1,Record2,Bestmove2).
+
+cut_off2(Player,Position,2,Alpha2,Bita2,Moves,Move,Value1,Record2,Bestmove2):-
+				Value1 > Alpha2,
+				same_lavel(Player,Position,2,Value1,Bita2,Moves,Move,Bestmove2).										
+
+cut_off2(Player,Position,2,Alpha2,Bita2,Moves,Move,Value1,Record2,Bestmove2):-
+				Value1 =< Alpha2,same_lavel(Player,Position,2,Alpha2,Bita2,Moves,Record2,Bestmove2).
+
+
+						   
+						   
+depth(Player,Position,1,Alpha1,Bita1,Move1,Value1):- 
+						    findall((X,Y),mark(Player,Position,X,Y),Moves),
+						    same_lavel(Player,Position,1,Alpha1,Bita1,Moves,nil,[Move1,Value1]).  %%%% reaching upto here
+							
+							
+							
+same_lavel(Player,Position,1,Alpha1,Bita1,[Move|Moves],Record1,Bestmove1):-
+									move(Player,Move,Position,New_position),other_player(Player,Other_player),   
+								    	depth(Other_player,New_position,0,Alpha1,Bita1,Move0,Value0),            
+									cut_off1(Player,Position,1,Alpha1,Bita1,Moves,Move,Value0,Record1,Bestmove1).
+									
+ /* cut_off1(Player,Position,1,Alpha1,Bita1,Moves,Move,Value0,Record1,Bestmove1):-
+									Value0 < Alpha1,!.		
+*/										
+
+cut_off1(Player,Position,1,Alpha1,Bita1,Moves,Move,Value0,Record1,Bestmove1):-
+									Value0 < Bita1, 
+									same_lavel(Player,Position,1,Alpha1,Value0,Moves,Move,Bestmove1).
+
+cut_off1(Player,Position,1,Alpha1,Bita1,Moves,Move,Value0,Record1,Bestmove1):-
+									Value0 >= Bita1 ,
+									same_lavel(Player,Position,1,Alpha1,Bita1,Moves,Record1,Bestmove1).
+
+									
+									
+
+
+depth(Player,Position,0,Alpha,Bita,Move,Value):-    value(Position,Value).
+						    
+
+
+
+same_lavel(Player,Position,2,Alpha,Bita,[],Record,[Record,Alpha]).
+
+
+same_lavel(Player,Position,1,Alpha,Bita,[],Record,[Record,Bita]).
+
+
+
+
+
+
+
+
+other_player(o,x).
+ other_player(x,o).
+
+h(X,Y) :- 
+   record(x,X,Y), 
+   showBoard,c.
+
+
+
+showBoard :- 
+   board([Z1,Z2,Z3,Z4,Z5,Z6,Z7,Z8,Z9]), 
+   write('    '),mark(Z1),write(' '),mark(Z2),write(' '),mark(Z3),nl,
+   write('    '),mark(Z4),write(' '),mark(Z5),write(' '),mark(Z6),nl,
+   write('    '),mark(Z7),write(' '),mark(Z8),write(' '),mark(Z9),nl.
+   
+   
+ s :- showBoard.
+ 
+
+ mark(X) :- 
+    var(X),
+    write('#').
+   
+ mark(X) :- 
+   \+var(X),
+   write(X).
+
